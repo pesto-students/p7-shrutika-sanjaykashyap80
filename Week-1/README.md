@@ -26,7 +26,8 @@ Networking - used for network calls, like HTTP requests. It has platform indepen
 UI backend - used for drawing basic widgets like combo boxes and windows. It exposes a generic interface that is not platform specific. Underneath it uses the operating system user interface methods.
 JavaScript interpreter. Used to parse and execute the JavaScript code.
 Data storage. This is a persistence layer. The browser needs to save all sorts of data on the hard disk, for examples, cookies. The new HTML specification (HTML5) defines 'web database' which is a complete (although light) database in the browser.
--------------------------------------
+![browser works](https://user-images.githubusercontent.com/91534908/201459183-d9257e58-70b5-4927-92f4-36f5a476432c.png)
+------------------------------------------------
 
 Rendering Engine and its tree
 Firefox, Chrome and Safari are built upon two rendering engines. Firefox uses Gecko - a "home made" Mozilla rendering engine. Both Safari and Chrome use Webkit.
@@ -39,7 +40,8 @@ Parsing a document means translating it to some structure that makes sense - som
 
 Example - parsing the expression "2 + 3 - 1" could return this tree:
 expression node(-) then having two child node numbernode(1) and expression node(+) and then expression node(+) having two number nodes 2 and 3.
----------------------------------------
+![parsing](https://user-images.githubusercontent.com/91534908/201459264-8774aeb9-a20d-4c14-80e7-a9768e5deb2e.png)
+--------------------------------------------------------
 
 Scripts processor
 The script processor executes Javascript code to process an event. The processor uses a pure Go implementation of ECMAScript 5.1 and has no external dependencies. This can be useful in situations where one of the other processors doesn't provide the functionality you need to filter events
