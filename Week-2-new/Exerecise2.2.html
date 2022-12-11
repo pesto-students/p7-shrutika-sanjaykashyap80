@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise2.2</title>
+    <style>
+        .rotate{
+            margin: -2px;
+            transition-property: all;
+            transition-duration: 1s;
+        }
+        .main:hover .rotate{
+        margin-left: 100px;
+        transform: rotate(-90deg);
+       }
+        .main:hover .rotate2{
+        margin-right: 100px;
+        transform: rotate(90deg);
+       }
+       .main:hover .rotate4{
+        margin-left: 203px;
+        transform: rotate(90deg);
+       }
+       p{
+        display: none;
+        margin: 12% 0 0 53%; position:absolute;
+       }
+       .main:hover p{
+        display: block;
+       }
+    </style>
+</head>
+<body>
+    <div class="main" style="text-align: center; margin-top: 100px;">
+        <p style="font-size: 25px;">Hi!</p>
+        <div>
+        <div class="rotate rotate2" style="width: 100px; height:100px; background-color: red; display: inline-block;"></div>
+        <div class="rotate" style="width: 100px; height:100px; background-color: green; display: inline-block;"></div>
+        </div>
+        <div>
+        <div class="rotate" style="width: 100px; height:100px; background-color: blue;display: inline-block;"></div>
+        <div class="rotate rotate4" style="width: 100px; height:100px; background-color: yellow; display: inline-block;"></div>
+        </div>
+    </div>
+</body>
+</html>
