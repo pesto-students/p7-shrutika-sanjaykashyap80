@@ -1,0 +1,235 @@
+create database demodb;
+show databases;
+create database pesto;
+use pesto;
+
+CREATE TABLE emp(
+ empno int(4) primary key,
+ ename varchar(50) not null,
+ mgr int(4),
+ hiredate date,
+ sal decimal(10, 2),
+ comm decimal(10, 2),
+ deptno int(2)
+);
+
+select * from emp;
+
+insert into emp values (1, 'Arun', )
+
+CREATE TABLE dept(
+  deptno int(2) primary key,
+  dname varchar(50) not null,
+  location varchar(50) not null
+);
+
+CREATE TABLE salgrade(
+   grade int(4) primary key,
+   losal decimal(10,2),
+   hisal decimal(10,2)
+   );
+   
+select * from dept;
+
+-- drop table salgrade
+
+insert into dept values (10, 'Accounting', 'New York');  
+insert into dept values (20, 'Accounting', 'New York'); 
+insert into dept values (30, 'Accounting', 'New York'); 
+insert into dept values (40, 'Accounting', 'New York'); 
+
+select * from emp where deptno = 10;
+
+select * from emp where sal = 1600;
+
+select ename, job, sal from emp where sal = 1600; 
+
+select concat(dname, ' ', location) as Random1 from dept;
+
+select distinct(deptno) from emp;
+
+select * from salgrade where grade < 4 and hisal > 4000; -- both the condtions LHS and RHS must be met 
+
+select * from emp;
+
+select * from emp where deptno = 20 or deptno = 30;
+
+select * from  emp where deptno != 30;
+
+select * from emp where sal between 2000 and 6000;
+
+select * from emp where deptno in (10, 20);
+
+select * from emp where ename = 'ALLEN';
+
+select * from emp where ename like 'S%';
+
+select * from emp where ename like 'a%';
+
+select * from emp where ename like '%l';
+
+select * from emp where ename like '%l_%';
+
+select * from emp where ename like 'A__n';
+
+select * from emp where ename like 'k%n';
+
+select * from emp where ename like 'k%n' or ename like 'm%n';
+
+update emp set job = 'analyst', deptno = 30 where empno = 6767;
+
+SET SQL_SAFE_UPDATES = 0;
+update salgrade set local = 1000;
+
+update dept set deptno = 25; -- if primary key => will get error Duplicate entry 20 for dept.PRIMARY
+
+update emp set mgr = NULL where empno = 7474;
+
+delete from salgrade where grade > 5;
+
+delete from salgrade where grade > 3 and losal < 3000;
+
+delete from salgrade;
+
+-- Aggregate functions
+
+select count(*) from emp;
+
+select count(ename) from emp;
+
+select min(sal) from emp;
+
+select max(sal) from emp;
+
+select avg(sal) from emp;
+
+select sum(sal) from emp;
+
+select job, avg(sal) from emp Group by job;
+
+select * from emp order by sal desc;
+
+select job, count(*) as number_of_emp from emp Group by job;
+
+select job, count(job) from emp Group by job;
+
+select Deptno, sum(Sal), min(Sal), max(Sal), avg(Sal), count(*) from emp Group by deptno;
+
+select deptno, sum(sal) from emp Group by deptno Having sum(sal) > 6000 order by sum(sal) DESC;
+
+select deptno, sum(sal) from emp Group by deptno;
+
+select * from emp;
+
+select * from dept;
+
+-- inner join
+select emp.empno, emp.ename, dept.dname, emp.job
+from emp
+inner join dept 
+on emp.deptno = dept.deptno;
+
+select emp.empno, emp.ename, dept.dname, emp.job
+from emp
+join dept 
+on emp.deptno = dept.deptno;
+
+select emp.empno, emp.ename, dept.dname, emp.job
+from emp as e, dept as d
+where e.deptno = d.deptno;
+
+-- left join
+
+SELECT e.empno, e.ename, d.dname, e.job FROM emp as e LEFT JOIN dept as d ON e.deptno = d.deptno;
+
+-- right join 
+
+select emp.empno, emp.ename, dept.dname, emp.job
+from emp
+right join dept 
+on emp.deptno = dept.deptno;
+
+-- FULL OUTER JOIN
+
+select emp.empno, emp.ename, dept.dname, emp.job
+from emp
+left join dept 
+on emp.deptno = dept.deptno
+UNION
+select emp.empno, emp.ename, dept.dname, emp.job
+from emp
+right join dept 
+on emp.deptno = dept.deptno;
+
+show databases;
+create database wareHouse;
+use wareHouse;
+show databases;
+create table cities(
+  city varchar(20) not null,
+  state varchar(20) not null
+);
+
+select * from cities;
+
+create table warehouses(
+  wid int primary key,
+  wname varchar(30) not null,
+  location varchar(20) not null,
+  extra_context json
+);
+select * from warehouses; 
+insert into warehouses values (1, 'food', 'pune', '{"quality":"good", "rating":5}');
+insert into warehouses values (2, 'Veg', 'pune', '{"quality":"good", "rating":4}');
+insert into warehouses values (3, 'Non veg', 'mumbai', '{"quality":"ok", "rating":3}');
+insert into warehouses values (1, 'Fruits', 'Delhi', '{"quality":"fine", "rating":2}');
+
+select * from warehouses where location = 'pune';
+
+
+
+
+create table stores(
+  sid int primary key,
+  store_name varchar(20) not null,
+  location_city varchar(20) not null
+);
+
+select * from stores;
+
+create table customer(
+  cno int primary key,
+  cname varchar(50) not null,
+  addr varchar(50) not null,
+  cu_city varchar(20) not null
+);
+
+select * from customer;
+insert into customer values (1, 'Mr. Patil', 'Delhi', 'Pune');
+insert into customer values (2, 'Arun', 'Noida', 'Mumbai');
+
+
+
+create table orders(
+  ono int primary key,
+  odate date
+);
+
+select * from orders;
+
+create table items(
+  itemno int primary key,
+  descript text not null,
+  weight decimal(5,2),
+  cost decimal(5,2)
+);
+
+select * from items;
+
+insert into items values (1, '5 star rating', 43, 345);
+insert into items values (2, '4 star rating', 33, 245);
+insert into items values (3, '5 star rating', 56, 125);
+insert into items values (4, '3 star rating', 33, 145);
+insert into items values (5, '1 star rating', 67, 129);
+
+select min(weight) from items;
